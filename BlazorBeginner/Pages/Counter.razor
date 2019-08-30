@@ -1,16 +1,30 @@
 ﻿@page "/counter"
+@page "/counter/{IncrementAmount:int}"
+@inject Microsoft.AspNetCore.Components.IUriHelper uriHelper
 
 <h1>Counter</h1>
 
 <p>Current count: @currentCount</p>
 
 <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+<button class="btn btn-secondary" @onclick="LinkParameter">link with parameter</button>
+
 
 @code {
-    int currentCount = 0;
+    private int currentCount = 0;
+
+    [Parameter]
+    public int IncrementAmount { get; set; } = 1;
+
 
     void IncrementCount()
     {
-        currentCount++;
+        currentCount += IncrementAmount;
+    }
+
+
+    void LinkParameter()
+    {
+        uriHelper.NavigateTo($"/counter/{currentCount}");
     }
 }

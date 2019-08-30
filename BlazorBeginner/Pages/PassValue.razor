@@ -1,0 +1,17 @@
+﻿@page "/PassValue/{ReceiveText}"
+
+<h1>Pass Value</h1>
+
+<p>Pass Value: @ReceiveText</p>
+
+
+@code {
+    [Parameter]
+    public string ReceiveText { get; set; }
+
+    protected override void OnParametersSet()
+    {
+        ReceiveText += "<-- OnParametersSet.";
+    }
+
+}
